@@ -1,18 +1,37 @@
-# Question-Answer Pair Generator App
+# 📝 Question-Answer Pair Generator
 
-## Problem Statement
-Creating high-quality assessment questions manually is time-consuming and requires domain expertise. This system automates question generation for:
-- Educational institutions (teachers creating tests)
-- E-learning platforms (automated quiz generation)
-- Corporate training (assessment creation)
-- Content creators (interactive material development)
+A sophisticated tool that automatically generates complete assessment questions with verified answers from provided educational content (PDFs or text context), powered by local LLMs via Ollama.
 
-## Key Features
-- **Multi-format Questions**: Generates 6+ question types (MCQ, True/False, Descriptive, etc.)
-- **Adaptive Difficulty**: Creates questions matching beginner to advanced levels
-- **Context-Aware**: Maintains semantic relevance to input material
-- **Local Processing**: Runs entirely on your machine using Ollama LLMs
-- **Customizable**: Easily modify prompts and templates
+## 🎯 Purpose
+Automate the creation of high-quality assessment materials including:
+- Questions with their correct answers
+- Multiple question formats
+- Difficulty-adjusted assessments
+for:
+- 🏫 Educational institutions (teacher-created tests)
+- 🖥️ E-learning platforms (automated quiz generation)
+- 🏢 Corporate training (compliance assessments)
+- ✍️ Content creators (interactive material development)
+
+## ✨ Key Features
+| Feature | Description |
+|---------|-------------|
+| Multiple Question Types | Supports MCQ, True/False, Descriptive, Fill-in-the-blank, Matching, and Short Answer |
+| Adaptive Difficulty | Automatically adjusts question complexity based on input parameters |
+| Context Preservation | Maintains semantic relevance to source material |
+| Local Processing | Runs entirely on your machine using Ollama LLMs |
+| Customizable Templates | Easily modify question formats and evaluation criteria |
+| Question and Answer Generation | Generates questions along with their corresponding answers based on the provided context or PDF |
+
+## Table of Contents
+- [Purpose](#-purpose)
+- [Key Features](#-key-features)
+- [Core System Components](#core-system-components)
+- [Data Flow](#data-flow-highlights)
+- [Usage Guide](#usage-guide)
+- [Advanced Features](#advanced-features)
+- [Development](#development-roadmap)
+- [Support](#support)
 
 ## Core System Components
 
@@ -26,42 +45,181 @@ Creating high-quality assessment questions manually is time-consuming and requir
 | `page1.py` | Results display | Shows questions with toggleable answers |
 
 ### Data Flow Highlights
+```mermaid
+flowchart TD
+    A[📝 User Input] -->|Text Content| B[Input Collection]
+    B --> C{✅ Validation}
+    C -->|Valid| D[Text Processing]
+    C -->|Invalid| B
+    D --> E[Prompt Generation]
+    E --> F[AI Generation]
+    F --> G[Question and Answer Validation]
+    G --> H{Approved?}
+    H -->|Yes| I[Display Results]
+    H -->|No| F
+    I --> J[Export Options]
+```
 1. **Input Collection**:
    - User provides context text (200+ words)
    - Selects question parameters via Streamlit UI
 
 2. **Processing**:
-   - Text cleaned and normalized
-   - Custom prompts generated
-   - AI creates questions with answers
+   - Text extracted and cleaned from input
+   - Custom question-answer generation prompts created
+   - AI generates questions with verified correct answers
+   - Answers cross-checked against source material
 
 3. **Output**:
    - Interactive question display
    - Export options (PDF/Text)
+    I --> J[Export Options]
 
-## Interactive System Visualization
+## 🔍 System Architecture & Workflow
 
+### System Architecture
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffd8d8'}}}%%
 flowchart TD
-    A[📝 User Input] -->|Text Content| B(main.py\nInput Collection)
-    B --> C{✅ Validation}
-    C -->|Valid| D[🛠️ utl.py\nText Processing]
-    C -->|Invalid| B
-    D --> E[💡 prompts.py\nTemplate Selection]
-    E --> F[🤖 llm.py\nAI Generation]
-    F --> G[🔍 utl.py\nQuality Check]
-    G --> H{Approved?}
-    H -->|Yes| I[📊 page1.py\nDisplay Results]
-    H -->|No| F
-    I --> J[📤 Export Options]
+    A[User Interface\nStreamlit Web App] --> B[Input 
+Processor]
+    B --> C[AI Question Generator]
+    C --> D[Output Formatter]
+    D --> E[Results Display]
     
-    click B "https://github.com/ayushkathoke/main.py" "main.py source"
-    click D "https://github.com/ayushkathoke/utl.py" "utl.py source"
-    click E "https://github.com/ayushkathoke/prompts.py" "prompts.py source"
-    click F "https://github.com/ayushkathoke/llm.py" "llm.py source"
-    click I "https://github.com/ayushkathoke/page1.py" "page1.py source"
+    style A fill:#74b9ff,stroke:#0984e3
+    style B fill:#55efc4,stroke:#00b894
+    style C fill:#ffeaa7,stroke:#fdcb6e
+    style D fill:#fab1a0,stroke:#e17055
+    style E fill:#00cec9,stroke:#00b894
 ```
+*Figure 1: System architecture showing the core components 
+and data flow*
+
+
+### Process Flow
+```mermaid
+flowchart TD
+    A[User Input] --> B(Text Processing)
+    B --> C(Prompt Engineering)
+    C --> D(LLM Generation)
+    D --> E(Quality Validation)
+    E --> F{Meets Standards?}
+    F -->|Yes| G[Output Questions]
+    F -->|No| D
+    G --> H(Export Options)
+    
+    style A fill:#74b9ff,stroke:#0984e3
+    style B fill:#55efc4,stroke:#00b894
+    style C fill:#ffeaa7,stroke:#fdcb6e
+    style D fill:#fab1a0,stroke:#e17055
+    style E fill:#fd79a8,stroke:#e84393
+    style F fill:#636e72,stroke:#2d3436
+    style G fill:#00cec9,stroke:#00b894
+    style H fill:#a29bfe,stroke:#6c5ce7
+```
+*Figure 2: Simplified process flow with key stages*
+
+### Technical Implementation
+```mermaid
+
+%%{init: {
+  'theme': 'default',
+  'themeVariables': {
+    'primaryColor': '#f1c40f',
+    'secondaryColor': '#2ecc71',
+    'tertiaryColor': '#bdc3c7',
+    'primaryTextColor': '#2d3436',
+    'secondaryTextColor': '#2d3436',
+    'noteBkgColor': '#ffeaa7',
+    'noteTextColor': '#2d3436',
+    'fontFamily': 'Arial, sans-serif',
+    'lineColor': '#636e72',
+    'textColor': '#2d3436'
+  }
+}}%%
+flowchart TD
+    A[📝 User Input]:::input -->|Text| B[Input Collection]:::ui
+    B --> C{Validation}:::decision
+    C -->|Valid| D[Text Processing]:::processing
+    C -->|Invalid| B
+    D --> E[Prompt Engineering]:::prompt
+    E --> F[AI Generation]:::ai
+    F --> G[Quality Check]:::validation
+    G --> H{Approved?}:::decision
+    H -->|Yes| I[Display Results]:::output
+    H -->|No| F
+    I --> J[Export Options]:::output
+
+    classDef input fill:#0984e3,color:#ffffff
+    classDef ui fill:#6c5ce7,color:#ffffff
+    classDef processing fill:#00b894,color:#ffffff
+    classDef prompt fill:#fdcb6e,color:#2d3436
+    classDef ai fill:#e17055,color:#ffffff
+    classDef validation fill:#e84393,color:#ffffff
+    classDef decision fill:#2d3436,color:#ffffff
+    classDef output fill:#00cec9,color:#2d3436
+
+    legend
+        Input:::input
+        UI:::ui
+        Processing:::processing
+        Prompts:::prompt
+        AI:::ai
+        Validation:::validation
+        Decision:::decision
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Detailed Process Breakdown
 
@@ -73,16 +231,16 @@ flowchart TD
     - Question type (MCQ/TrueFalse/etc)
     - Difficulty level
     - Question count
-- **Visual**: ![Input Screen](https://example.com/input-screen.gif)
+- **Visual**: ![Input Screen showing text area and parameter controls](assets/input-screen.png)
 
 #### 2️⃣ Processing Pipeline
 | Step | File | Action | Developer |
 |------|------|--------|-----------|
-| Validation | main.py | Checks input requirements | [@dev1](https://github.com/dev1) |
-| Text Clean | utl.py | Normalizes whitespace, removes special chars | [@dev2](https://github.com/dev2) |
-| Prompt Gen | prompts.py | Creates LLM instructions | [@dev3](https://github.com/dev3) |
-| AI Gen | llm.py | Generates questions using Ollama | [@dev1](https://github.com/dev1) |
-| QA Check | utl.py | Validates question structure | [@dev2](https://github.com/dev2) |
+| Validation | main.py | Checks input requirements | [@ayushkathoke](https://github.com/ayushkathoke) |
+| Text Clean | utl.py | Normalizes whitespace, removes special chars | [@ayushkathoke](https://github.com/ayushkathoke) |
+| Prompt Gen | prompts.py | Creates LLM instructions | [@ayushkathoke](https://github.com/ayushkathoke) |
+| AI Gen | llm.py | Generates questions using Ollama | [@ayushkathoke](https://github.com/ayushkathoke) |
+| QA Check | utl.py | Validates question structure | [@ayushkathoke](https://github.com/ayushkathoke) |
 
 #### 3️⃣ Output Phase
 - **File**: `page1.py`
@@ -90,12 +248,14 @@ flowchart TD
   - Interactive question cards
   - Toggleable answers
   - Multi-format export (PDF/Text)
-- **Visual**: ![Output Screen](https://example.com/output-screen.gif)
+- **Visual**: ![Output Screen showing generated questions with toggleable answers](assets/output-screen.png)
 
 ### Developer Information
-![Ayush's Profile]()  
-- **Primary Developer**: [Ayush Kathoke](https://github.com/ayushkathoke) - Full system development  
+![Ayush's Profile](Ayush.jpg)  
+- **Developer**: [Ayush Kathoke](https://github.com/ayushkathoke) - Full system development  
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-ayushkathoke-blue)](https://www.linkedin.com/in/ayushkathoke)
+  
+**All components developed solely by Ayush Kathoke**
 
 ## Detailed Step-by-Step Explanation
 
@@ -167,15 +327,46 @@ ollama pull llama3.2
 streamlit run main.py
 ```
 
-## Usage Guide
-1. Launch the application
-2. Enter your context text
-3. Select question parameters:
-   - Number of questions
-   - Question type
-   - Difficulty level
-4. Click "Generate Questions"
-5. View and copy the results
+## 🧭 Step-by-Step User Guide
+
+### 1. Launch the Application
+```bash
+streamlit run main.py
+```
+*The application will open at:* `http://localhost:8501`
+
+### 2. Provide Input Content
+![Input Interface](assets/input-screen.png)
+*Figure 3: Input screen with text area and controls*
+
+**Requirements:**
+- Minimum 200 words of educational content
+- Supported formats:
+  - Plain text (recommended)
+  - PDF documents
+  - Markdown content
+
+**Best Practices:**
+- Use well-structured source material
+- Avoid overly technical jargon unless needed
+- Include complete paragraphs for best results
+
+### 3. Configure Generation Parameters
+| Parameter | Options | Default | Notes |
+|-----------|---------|---------|-------|
+| Question Type | MCQ, True/False, Descriptive | MCQ | Start simple |
+| Difficulty | Easy, Medium, Hard | Medium | Adjust based on audience |
+| Question Count | 5-20 | 10 | More questions need longer text |
+
+### 4. Generate and Review Results
+![Output Interface](assets/output-screen.png)
+*Figure 4: Generated questions with interactive controls*
+
+**Features:**
+- Toggle answer visibility
+- Regenerate specific questions
+- Export in multiple formats
+- Session history tracking
 
 ## Advanced Configuration
 - Change LLM model in `llm.py` (MODEL_NAME variable)
@@ -198,6 +389,42 @@ streamlit run main.py
    - Increase context length (minimum 200 words recommended)
    - Adjust temperature parameter in `llm.py` (0.7-1.0 for creative, 0.1-0.5 for factual)
    - Try different LLM models (see Advanced Configuration)
+
+## 💡 Example Outputs
+
+### Multiple Choice Question
+```markdown
+Q: What is the primary function of mitochondria?
+A) Protein synthesis
+B) Energy production ✓
+C) Waste removal
+D) Cell division
+
+*Difficulty: Medium*
+*Source: Chapter 3, paragraph 2*
+```
+
+### True/False Question
+```markdown
+Q: Photosynthesis occurs in animal cells. (False) ✓
+
+*Confidence: 92%*
+*Validated Against: Textbook page 45*
+```
+
+### Descriptive Question
+```markdown
+Q: Explain the process of cellular respiration in 3-4 sentences.
+
+Model Answer:
+Cellular respiration is the process by which cells convert glucose and oxygen into energy (ATP), carbon dioxide, and water. It occurs in three main stages: glycolysis, the Krebs cycle, and the electron transport chain. This process takes place primarily in the mitochondria of eukaryotic cells. The energy produced is used for various cellular functions.
+
+*Assessment Rubric:*
+- Accuracy (40%)
+- Completeness (30%)
+- Clarity (20%)
+- Conciseness (10%)
+```
 
 ## Real-World Use Cases
 ### Education Sector
