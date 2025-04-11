@@ -445,7 +445,9 @@ streamlit run main.py
 *The application will open at:* `http://localhost:8501`
 
 ### 2. Provide Input Content
-![Input Interface](assets/input-screen.png)
+![Input Interface](./input.png)
+![Input Interface](./image1.png)
+![Input Interface](./image2.png)
 *Figure 3: Input screen with text area and controls*
 
 **Requirements:**
@@ -468,7 +470,7 @@ streamlit run main.py
 | Question Count | 5-20 | 10 | More questions need longer text |
 
 ### 4. Generate and Review Results
-![Output Interface](assets/output-screen.png)
+![Output Interface](./output.png)
 *Figure 4: Generated questions with interactive controls*
 
 **Features:**
