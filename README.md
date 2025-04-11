@@ -272,7 +272,11 @@ flowchart TD
     - Question type (MCQ/TrueFalse/etc)
     - Difficulty level
     - Question count
-- **Visual**: ![Input Screen showing text area and parameter controls](assets/input-screen.png)
+- **Visual**: ![Input Screen showing text area and parameter controls](input.png)
+-  ![Parameter controls interface](image1.png)
+-   ![Parameter controls interface](image2.png)
+  
+  ---
 
 #### 2️⃣ Processing Pipeline
 | Step | File | Action | Developer |
@@ -289,7 +293,7 @@ flowchart TD
   - Interactive question cards
   - Toggleable answers
   - Multi-format export (PDF/Text)
-- **Visual**: ![Output Screen showing generated questions with toggleable answers](assets/output-screen.png)
+- **Visual**: ![Output Screen showing generated questions with toggleable answers](output.png)
 
 ---
 
