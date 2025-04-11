@@ -24,14 +24,55 @@ for:
 | Question and Answer Generation | Generates questions along with their corresponding answers based on the provided context or PDF |
 
 ## Table of Contents
-- [Purpose](#-purpose)
-- [Key Features](#-key-features)
-- [Core System Components](#core-system-components)
-- [Data Flow](#data-flow-highlights)
-- [Usage Guide](#usage-guide)
-- [Advanced Features](#advanced-features)
-- [Development](#development-roadmap)
-- [Support](#support)
+- [📝 Question-Answer Pair Generator](#-question-answer-pair-generator)
+  - [🎯 Purpose](#-purpose)
+  - [✨ Key Features](#-key-features)
+  - [Table of Contents](#table-of-contents)
+  - [Core System Components](#core-system-components)
+    - [Key Modules and Their Roles](#key-modules-and-their-roles)
+    - [Data Flow Highlights](#data-flow-highlights)
+  - [🔍 System Architecture \& Workflow](#-system-architecture--workflow)
+    - [System Architecture](#system-architecture)
+    - [Process Flow](#process-flow)
+    - [Technical Implementation](#technical-implementation)
+    - [Detailed Process Breakdown](#detailed-process-breakdown)
+      - [1️⃣ User Input Phase](#1️⃣-user-input-phase)
+      - [2️⃣ Processing Pipeline](#2️⃣-processing-pipeline)
+      - [3️⃣ Output Phase](#3️⃣-output-phase)
+    - [👨‍💻 Developer Information](#-developer-information)
+    - [Ayush Kathoke](#ayush-kathoke)
+      - [📬 Connect With Me](#-connect-with-me)
+      - [🛠 Technical Skills](#-technical-skills)
+      - [🏗 Project Ownership](#-project-ownership)
+      - [⌛ Availability](#-availability)
+  - [Detailed Step-by-Step Explanation](#detailed-step-by-step-explanation)
+    - [Basic Usage Flow](#basic-usage-flow)
+    - [Advanced Features](#advanced-features)
+  - [Project Structure Deep Dive](#project-structure-deep-dive)
+  - [Setup Instructions](#setup-instructions)
+  - [🧭 Step-by-Step User Guide](#-step-by-step-user-guide)
+    - [1. Launch the Application](#1-launch-the-application)
+    - [2. Provide Input Content](#2-provide-input-content)
+    - [3. Configure Generation Parameters](#3-configure-generation-parameters)
+    - [4. Generate and Review Results](#4-generate-and-review-results)
+  - [Advanced Configuration](#advanced-configuration)
+  - [Troubleshooting](#troubleshooting)
+    - [Common Issues and Solutions](#common-issues-and-solutions)
+  - [💡 Example Outputs](#-example-outputs)
+    - [Multiple Choice Question](#multiple-choice-question)
+    - [True/False Question](#truefalse-question)
+    - [Descriptive Question](#descriptive-question)
+  - [Real-World Use Cases](#real-world-use-cases)
+    - [Education Sector](#education-sector)
+    - [Corporate Training](#corporate-training)
+    - [Content Creation](#content-creation)
+  - [Development Roadmap](#development-roadmap)
+    - [Planned Features](#planned-features)
+    - [Known Limitations](#known-limitations)
+  - [Contribution Guidelines](#contribution-guidelines)
+  - [🙌 Support](#-support)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
 
 ## Core System Components
 
@@ -250,12 +291,77 @@ flowchart TD
   - Multi-format export (PDF/Text)
 - **Visual**: ![Output Screen showing generated questions with toggleable answers](assets/output-screen.png)
 
-### Developer Information
-![Ayush's Profile](Ayush.jpg)  
-- **Developer**: [Ayush Kathoke](https://github.com/ayushkathoke) - Full system development  
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-ayushkathoke-blue)](https://www.linkedin.com/in/ayushkathoke)
-  
-**All components developed solely by Ayush Kathoke**
+---
+
+### 👨‍💻 Developer Information
+
+<div align="center" style="border: 1px solid #444; border-radius: 12px; padding: 20px; max-width: 700px; background-color: transparent;">
+
+<img src="Ayush.jpg" alt="Ayush Kathoke's Profile" width="130" style="border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+
+### <span style="color: #ff7675;">Ayush Kathoke</span>  
+**Full Stack Developer & AI Engineer**  
+*Specialized in NLP, LLMs & Educational AI Systems*  
+🧠 3+ years of experience building real-world AI apps
+
+---
+
+#### 📬 Connect With Me
+
+<a href="https://www.linkedin.com/in/ayushkathoke" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-ayushkathoke-blue?style=flat-square&logo=linkedin" />
+</a>
+<a href="https://github.com/ayushkathoke" target="_blank">
+  <img src="https://img.shields.io/badge/GitHub-ayushkathoke-black?style=flat-square&logo=github" />
+</a>
+<a href="https://ayushkathoke.dev" target="_blank">
+  <img src="https://img.shields.io/badge/Portfolio-ayushkathoke.dev-9cf?style=flat-square&logo=firefox" />
+</a>
+<a href="mailto:ayushkathoke16@gmail.com">
+  <img src="https://img.shields.io/badge/Gmail-ayushkathoke16@gmail.com-red?style=flat-square&logo=gmail" />
+</a>
+
+---
+
+#### 🛠 Technical Skills
+
+- **Languages**: Python, JavaScript, TypeScript  
+- **Frameworks**: Streamlit, FastAPI, React  
+- **AI/ML**: Large Language Models (LLMs), Prompt Engineering, NLP  
+- **DevOps**: Docker, GitHub Actions, CI/CD Pipelines  
+
+---
+
+#### 🏗 Project Ownership
+
+All system components were designed, 
+developed and implemented solely by 
+Ayush Kathoke, including:
+- 🔧 System Architecture  
+- 💻 Fullstack Development  
+- 🧠 AI Model Integration  
+- ✅ Testing & Deployment  
+
+---
+
+#### ⌛ Availability
+
+Available for consulting and 
+collaboration on educational technology 
+projects.
+
+</div>
+
+
+
+---
+
+
+
+
+
+
+
 
 ## Detailed Step-by-Step Explanation
 
@@ -300,14 +406,13 @@ flowchart TD
 ## Project Structure Deep Dive
 ```
 project/
-├── main.py            # Streamlit main application
+├── main.py            # Streamlit main application with landing page
 ├── page1.py           # Home page implementation
 ├── llm.py             # LLM question generation logic
 ├── prompts.py         # Prompt templates
 ├── utl.py             # Utility functions
 ├── conf.py            # Configuration settings
 ├── requirements.txt   # Python dependencies
-├── landing_page.html  # Landing page template
 └── README.md          # This file
 ```
 
@@ -463,11 +568,27 @@ Cellular respiration is the process by which cells convert glucose and oxygen in
    - Updated documentation
    - Passing tests (if applicable)
 
-## Support
-For additional help:
-- Check GitHub Issues for known problems
-- Email ayushkathoke16@gmail.com
-- Join our Discord community
+## 🙌 Support
 
-## License
-MIT License - See LICENSE file for details
+Need help or want to contribute? Here’s how you can get support:
+
+- 📋 [View or Report Issues](https://github.com/ayushkathoke/Q-A-Pair-Generator-Web-App/issues)
+- 📧 Email: [ayushkathoke16@gmail.com](mailto:ayushkathoke16@gmail.com)
+- 💬 Join the [Discord Community](https://discord.gg/your-server-invite) — ask questions, share ideas, and connect with fellow developers
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, and ideas are welcome!  
+Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) *(or create one if it doesn’t exist yet)* for guidelines on how to get started.
+
+Don’t forget to ⭐ star the repo if you like the project!
+
+---
+
+## 📄 License
+
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)  
+This project is licensed under the **MIT License**.  
+See the [LICENSE](./LICENSE) file for full legal information.
